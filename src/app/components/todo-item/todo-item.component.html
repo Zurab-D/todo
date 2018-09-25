@@ -1,0 +1,6 @@
+<div class="row my-1" [class.done]="todo.done">
+  <span class="item-id col-md-1 my-auto">{{todo.id}}</span>
+  <span class="item-text col my-auto">{{todo.name}} </span>
+  <label class="cb-done col-md-2 my-auto">done: <input type="checkbox" [checked]="todo.done" (change)="cbClicked($event)"></label>
+  <button class="del float-right btn btn-warning" (click)="onDelete()">delete</button>
+</div>
