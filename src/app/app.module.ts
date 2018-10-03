@@ -7,6 +7,8 @@ import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoInputComponent } from './components/todo-input/todo-input.component';
 import { SearchDirective } from './directives/search.directive';
+import { PrefixPipe } from './pipes/prefix.pipe';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -14,12 +16,13 @@ import { SearchDirective } from './directives/search.directive';
     TodoItemComponent,
     TodoListComponent,
     TodoInputComponent,
-    SearchDirective
+    SearchDirective,
+    PrefixPipe
   ],
   imports: [
     BrowserModule, FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ DataService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

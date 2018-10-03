@@ -1,13 +1,13 @@
 import { Directive, HostListener, ElementRef, Input } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Directive({
   selector: '[appSearch]'
 })
 export class SearchDirective {
-  @Input('appSearch') searchDataSource: string[] = [];
   private ulElem: HTMLElement; // выпадающий список <ul>...</ul>
 
-  constructor(private element: ElementRef) {
+  constructor(private dataService: DataService, private element: ElementRef) {
     // создаем выпадающий список
     this.ulElem = document.createElement('ul');
     this.ulElem.className = 'ul-search-list';
@@ -24,7 +24,7 @@ export class SearchDirective {
     let val: string;
     this.ulElem.innerHTML = '';
 
-    let dataFiltered: string[] = this.searchDataSource.filter((item: string) => {
+    let dataFiltered = this.dataService.todos.map(item => item.name).filter((item: string) => {
       val = this.element.nativeElement.value;
       return !!val && item.includes(val)
     });
@@ -42,5 +42,4 @@ export class SearchDirective {
       this.ulElem.style.display = 'none';
     }
   }
-
 }

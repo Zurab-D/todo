@@ -1,25 +1,23 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 import { ITodo, Todo } from '../../chared/todo';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-todo-input',
   templateUrl: './todo-input.component.html',
   styleUrls: ['./todo-input.component.css']
 })
-export class TodoInputComponent {
-  private names: string[];
+export class TodoInputComponent implements OnChanges {
+  @Input() todos = [];
 
-  @Input() set data(todos: ITodo[]) {
-    this.names = todos.map(item => item.name);
-  };
-
-  @Output() addItem: EventEmitter<ITodo> = new EventEmitter();
-
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   onSubmit(name: HTMLInputElement) {
-    this.addItem.emit(new Todo(undefined, name.value, false));
+    this.dataService.add(new Todo(undefined, name.value, false));
     name.value = '';
   }
 
+  ngOnChanges(ch) {
+    console.log(ch);
+  }
 }

@@ -18,8 +18,4 @@ export class AppComponent {
     )
   }
 
-  onItemAdded(newTodo: ITodo) {
-    console.dir(newTodo);
-    this.newItem = newTodo;
-  }
 }
