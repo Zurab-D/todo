@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ITodo } from '../../chared/todo';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -12,17 +13,13 @@ export class TodoItemComponent {
   @Output() checked: EventEmitter<ITodo> = new EventEmitter();
   @Output() unchecked: EventEmitter<ITodo> = new EventEmitter();
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   onDelete() {
-    this.delTodo.emit(this.todo);
+    this.dataService.delete(this.todo);
   }
 
   cbClicked(evt) {
-    if (evt.target.checked) {
-      this.checked.emit(this.todo);
-    } else {
-      this.unchecked.emit(this.todo);
-    }
+    this.dataService.done(this.todo, evt.target.checked);
   }
 }

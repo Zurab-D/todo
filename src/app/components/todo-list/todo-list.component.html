@@ -1,7 +1,6 @@
 <br>
 <app-todo-item *ngFor="let todo of todos"
     [todo]="todo"
-    (delTodo)="deleteItem($event)"
     (checked)="itemChecked($event, true)"
     (unchecked)="itemChecked($event, false)"
 ></app-todo-item>
